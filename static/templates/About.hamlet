@@ -1,0 +1,29 @@
+$doctype 5
+<html>
+    <head>
+        <title>About
+        <link rel=stylesheet href=/styles.css>
+    <body>
+        ^{navbar}
+        <header #about-header>
+            <h1>About
+
+        <div .hseparator>
+
+        <section #about-content>
+            <div .about-section>
+                <p>
+                    Hi! I'm Alexander Goussas. I'm a CS undergrad student at ESPOL,
+                    Ecuador. I am also an active member of the university's
+                    Open Source club #
+                    <a href=https://github.com/kokoaespol>Kokoa.
+                <p>
+                    I'm passionate about many programming topics and love having
+                    fun programming with others.
+
+            <div .about-section>
+                <h3>Contact me
+                <p>
+                    You can find me on Twitter as #
+                    <a href=https://twitter.com/aloussase>@aloussase.
+

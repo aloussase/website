@@ -4,7 +4,6 @@ module View.Internal.Navbar
 )
 where
 
-import           Text.Blaze.Html (Html)
 import           Text.Hamlet
 
 navbar :: Html

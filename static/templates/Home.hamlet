@@ -8,5 +8,16 @@ $doctype 5
         <header #home-header>
             <h1>Hi, I'm Alexander!
             <h2>Welcome to my website
+
+        <div .hseparator>
+
         <section #home-posts>
+            $if null posts
+                <span #empty-posts>Whoa! Such empty
+            $else
+                $forall post <- posts
+                    <div .post-preview>
+                        <span .post-title>#{bpTitle post}
+                        <p .post-description>#{bpShortDescription post}
+                        <span .post-date>#{bpDate post}
 

@@ -15,6 +15,9 @@ runWebApp bpService bpRepository = scotty 3000 $ do
     setHeader "Content-Type" "text/css; charset=utf-8"
     text View.renderCss
 
-  get "/" $ do
+  get "/" $ redirect "/blog"
+  get "/blog" $ do
     homePage <- liftIO $ View.renderHomePage bpService bpRepository
     html homePage
+
+  get "/about" $ liftIO View.renderAboutPage >>= html

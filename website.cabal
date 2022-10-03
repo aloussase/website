@@ -35,14 +35,16 @@ library view
     exposed-modules:  View.Component
     other-modules:
         View.Internal.HomePage
-      , View.Internal.Static
+      , View.Internal.AboutPage
       , View.Internal.Navbar
+      , View.Internal.Static
     build-depends:
         base ^>=4.15.1.0
-      , blogpost
-      , text
-      , shakespeare
       , blaze-html
+      , blogpost
+      , shakespeare
+      , text
+      , time
     default-language: Haskell2010
     default-extensions: OverloadedStrings, TemplateHaskell, QuasiQuotes, CPP
 

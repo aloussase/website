@@ -12,12 +12,20 @@
 body
     background-color: #{backgroundColor}
     color: #{foregroundColor}
-    width: 80%
+    width: 60%
     margin: auto
     font-family: #{mainFont}
 
 a
     text-decoration: none
+
+.hseparator
+    height: 1px
+    width: 100%
+    background-color: #{foregroundColor}
+    opacity: 0.4
+    margin-top: 1rem
+    margin-bottom: 1rem
 
 #navbar
     display: flex
@@ -32,3 +40,20 @@ a
 
 #home-header
     text-align: center
+
+#home-posts
+    width: 100%
+    display: flex
+    align-items: center
+    justify-content: center
+
+    #empty-posts
+        font-size: 2rem
+        text-align: center
+
+#about-content
+    .about-section
+        margin-bottom: 1rem
+
+        p
+            line-height: 200%
