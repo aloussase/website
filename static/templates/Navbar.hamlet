@@ -1,0 +1,6 @@
+<nav #navbar>
+    <div>
+        <a href=/>Home
+        <a href=/blog>Blog
+        <a href=/projects>Projects
+        <a href=/about>About

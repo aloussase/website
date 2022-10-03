@@ -1,0 +1,70 @@
+cabal-version:      2.4
+name:               website
+version:            0.1.0.0
+synopsis:           Personal website.
+bug-reports:        https://github.com/aloussase/website.git
+license:            MIT
+author:             Alexander Goussas
+maintainer:         goussasalexander@gmail.com
+copyright:          Alexander Goussas 2022
+category:           Web
+extra-source-files: README
+
+
+library blogpost
+    ghc-options:      -Wall -Wunused-packages
+    hs-source-dirs:   blogpost
+    exposed-modules:  BlogPost.Component
+    other-modules:
+        BlogPost.Internal.Repository
+      , BlogPost.Internal.Repository.InMemory
+      , BlogPost.Internal.Service
+      , BlogPost.Internal.Service.Impl
+      , BlogPost.Internal.Types
+    build-depends:
+        base ^>=4.15.1.0
+      , text
+      , time
+      , containers
+    default-language: Haskell2010
+    default-extensions: TypeFamilies
+
+library view
+    ghc-options:      -Wall -Wunused-packages
+    hs-source-dirs:   view
+    exposed-modules:  View.Component
+    other-modules:
+        View.Internal.HomePage
+      , View.Internal.Static
+      , View.Internal.Navbar
+    build-depends:
+        base ^>=4.15.1.0
+      , blogpost
+      , text
+      , shakespeare
+      , blaze-html
+    default-language: Haskell2010
+    default-extensions: OverloadedStrings, TemplateHaskell, QuasiQuotes, CPP
+
+library web
+    hs-source-dirs:   web
+    ghc-options:      -Wall -Wunused-packages
+    exposed-modules:  Web.Component
+    other-modules:
+        Web.Internal.Controller.BlogPost
+    build-depends:
+        base ^>=4.15.1.0
+      , view
+      , blogpost
+      , scotty
+    default-language: Haskell2010
+    default-extensions: OverloadedStrings
+
+executable website
+    main-is:          Main.hs
+    ghc-options:      -Wall -Wunused-packages
+    build-depends:
+        base ^>=4.15.1.0
+      , blogpost
+      , web
+    default-language: Haskell2010

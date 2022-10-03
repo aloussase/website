@@ -1,0 +1,21 @@
+This is my personal website, for any questions, open an issue or send me an
+email at goussasalexander@gmail.com.
+
+build
+=====
+
+cabal build
+
+or
+
+cabal build --ghc-options=-DPRODUCTION=1
+
+
+run
+===
+
+cabal run
+
+or
+
+cabal run --ghc-options=-DPRODUCTION=1

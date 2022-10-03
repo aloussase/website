@@ -1,0 +1,12 @@
+$doctype 5
+<html>
+    <head>
+        <title>Home
+        <link rel=stylesheet href=/styles.css>
+    <body>
+        ^{navbar}
+        <header #home-header>
+            <h1>Hi, I'm Alexander!
+            <h2>Welcome to my website
+        <section #home-posts>
+
