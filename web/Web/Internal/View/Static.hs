@@ -1,11 +1,8 @@
-module View.Internal.Static
-(
-  renderCss
-)
-where
+module Web.Internal.View.Static (renderCss) where
 
 import           Data.Text.Lazy (Text)
 import qualified Text.Cassius   as C
+
 
 renderCss :: Text
 #if PRODUCTION
@@ -15,3 +12,5 @@ renderCss = C.renderCss $ $(C.cassiusFileReload "static/templates/Styles.cassius
 #endif
   where
     render = undefined
+
+

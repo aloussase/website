@@ -29,17 +29,18 @@ library blogpost
     default-language: Haskell2010
     default-extensions: TypeFamilies
 
-library view
+library web
+    hs-source-dirs:   web
     ghc-options:      -Wall -Wunused-packages
-    hs-source-dirs:   view
-    exposed-modules:  View.Component
+    exposed-modules:  Web.Component
     other-modules:
-        View.Internal.HomePage
-      , View.Internal.AboutPage
-      , View.Internal.Navbar
-      , View.Internal.Static
+          Web.Internal.Controller.BlogPost
+        , Web.Internal.View.Static
+        , Web.Internal.View.Pages
     build-depends:
         base ^>=4.15.1.0
+      , blogpost
+      , scotty
       , blaze-html
       , blogpost
       , shakespeare
@@ -47,20 +48,6 @@ library view
       , time
     default-language: Haskell2010
     default-extensions: OverloadedStrings, TemplateHaskell, QuasiQuotes, CPP, RecordWildCards
-
-library web
-    hs-source-dirs:   web
-    ghc-options:      -Wall -Wunused-packages
-    exposed-modules:  Web.Component
-    other-modules:
-        Web.Internal.Controller.BlogPost
-    build-depends:
-        base ^>=4.15.1.0
-      , view
-      , blogpost
-      , scotty
-    default-language: Haskell2010
-    default-extensions: OverloadedStrings
 
 executable website
     main-is:          Main.hs

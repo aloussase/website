@@ -1,10 +1,9 @@
-module View.Internal.HomePage
+module Web.Internal.View.Pages
 (
-  renderHomePage
+    renderHomePage
+  , renderAboutPage
 )
 where
-
-import           View.Internal.Navbar
 
 import           BlogPost.Component            (bpDate, bpShortDescription,
                                                 bpTitle)
@@ -23,3 +22,9 @@ renderHomePage :: BlogPost.Component -> IO Text
 renderHomePage BlogPost.Component {..} = do
   posts <- BlogPost.findAll bpService bpRepository
   pure $ renderHtml $(shamletFile "static/templates/Home.hamlet")
+
+renderAboutPage :: IO Text
+renderAboutPage = pure $ renderHtml $(shamletFile "static/templates/About.hamlet")
+
+navbar :: Html
+navbar = $(shamletFile "static/templates/Navbar.hamlet")
