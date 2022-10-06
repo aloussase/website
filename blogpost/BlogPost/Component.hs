@@ -1,10 +1,10 @@
 module BlogPost.Component
 (
-    module BlogPost.Internal.Service
-  , module BlogPost.Internal.Types
+    module BlogPost.Internal.Types
+  , Component (..)
   , Repository
-  , newService
-  , newRepository
+  , Service (..)
+  , new
 )
 where
 
@@ -14,8 +14,13 @@ import           BlogPost.Internal.Service
 import qualified BlogPost.Internal.Service.Impl        as Service
 import           BlogPost.Internal.Types
 
-newService :: IO Service.Handle
-newService = pure Service.new
+data Component =
+  Component
+  { bpService    :: Service.Handle
+  , bpRepository :: InMemory.Handle
+  }
 
-newRepository :: IO InMemory.Handle
-newRepository = InMemory.new
+
+-- | Create a new BlogPost component.
+new :: IO Component
+new = Component <$> pure Service.new <*> InMemory.new

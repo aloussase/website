@@ -19,7 +19,7 @@ import           Text.Hamlet
 
 instance ToMarkup UTCTime where toMarkup = string . show
 
-renderHomePage :: (BlogPost.Service s, BlogPost.Repository r) => s -> r -> IO Text
-renderHomePage service repository = do
-  posts <- BlogPost.findAll service repository
+renderHomePage :: BlogPost.Component -> IO Text
+renderHomePage BlogPost.Component {..} = do
+  posts <- BlogPost.findAll bpService bpRepository
   pure $ renderHtml $(shamletFile "static/templates/Home.hamlet")

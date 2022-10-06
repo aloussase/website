@@ -1,10 +1,9 @@
 module Main where
 
-import qualified BlogPost.Component as BlogPost
+import qualified BlogPost.Component as BPC
 import           Web.Component      (runWebApp)
 
 main :: IO ()
 main = do
-  blogPostService <- BlogPost.newService
-  blogPostRepository <- BlogPost.newRepository
-  runWebApp blogPostService blogPostRepository
+  bpComponent <- BPC.new
+  runWebApp bpComponent
