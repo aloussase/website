@@ -9,6 +9,8 @@ maintainer:         goussasalexander@gmail.com
 copyright:          Alexander Goussas 2022
 category:           Web
 extra-source-files: README
+data-files:         static/templates/*.hamlet
+                  , static/templates/*.cassius
 
 
 library blogpost

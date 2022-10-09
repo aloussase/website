@@ -15,7 +15,6 @@ import           Text.Blaze.Html               (ToMarkup (..), string)
 import           Text.Blaze.Html.Renderer.Text
 import           Text.Hamlet
 
-
 instance ToMarkup UTCTime where toMarkup = string . show
 
 renderHomePage :: BlogPost.Component -> IO Text
