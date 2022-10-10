@@ -9,7 +9,8 @@ maintainer:         goussasalexander@gmail.com
 copyright:          Alexander Goussas 2022
 category:           Web
 extra-source-files: README
-
+data-files:         static/templates/*.hamlet
+                  , static/templates/*.cassius
 
 library blogpost
     ghc-options:      -Wall -Wunused-packages -Wno-name-shadowing
@@ -25,7 +26,6 @@ library blogpost
     build-depends:
         base ^>=4.15.1.0
       , containers
-      , data-default
       , directory 
       , filepath
       , text

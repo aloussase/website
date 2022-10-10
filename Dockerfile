@@ -10,4 +10,6 @@ RUN cabal build --only-dependencies -j4
 COPY . .
 RUN cabal install
 
+ENV BLOG_POSTS_PATH=/opt/app/static/posts/
+
 CMD ["website"]
