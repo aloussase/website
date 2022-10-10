@@ -51,6 +51,24 @@ a
         font-size: 2rem
         text-align: center
 
+    .post-preview
+        display: flex
+        flex-direction: column
+        padding: 1rem
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        width: 100%
+        transition: all 0.5s
+        cursor: pointer
+
+        &:hover
+            color: #{backgroundColor}
+            background-color: #{foregroundColor}
+            transform: scale(105%)
+
+        .post-meta
+            margin-bottom: 0.5rem
+
+
 #about-content
     .about-section
         margin-bottom: 1rem

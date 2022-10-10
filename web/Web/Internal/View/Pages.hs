@@ -5,8 +5,8 @@ module Web.Internal.View.Pages
 )
 where
 
-import           BlogPost.Component            (bpDate, bpShortDescription,
-                                                bpTitle)
+import           BlogPost.Component            (infoDate, infoDescription,
+                                                infoTitle)
 import qualified BlogPost.Component            as BlogPost
 
 import           Data.Text.Lazy                (Text)

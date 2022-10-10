@@ -7,7 +7,7 @@ import           Control.Monad.IO.Class       (MonadIO)
 
 class Service a where
   -- | Find all blog posts.
-  findAll :: (Repository r, MonadIO m) => a -> r -> m [BlogPost]
+  findAll :: (Repository r, MonadIO m) => a -> r -> m [BlogPostInfo (Id r)]
 
   -- | Find a blog post by id using a given repository.
-  findById :: (Repository r, MonadIO m) => a -> r -> (Id r) -> m (Maybe BlogPost)
+  findById :: (Repository r, MonadIO m) => a -> r -> Id r -> m (Maybe BlogPost)

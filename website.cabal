@@ -9,27 +9,29 @@ maintainer:         goussasalexander@gmail.com
 copyright:          Alexander Goussas 2022
 category:           Web
 extra-source-files: README
-data-files:         static/templates/*.hamlet
-                  , static/templates/*.cassius
 
 
 library blogpost
-    ghc-options:      -Wall -Wunused-packages
+    ghc-options:      -Wall -Wunused-packages -Wno-name-shadowing
     hs-source-dirs:   blogpost
     exposed-modules:  BlogPost.Component
     other-modules:
         BlogPost.Internal.Repository
+      , BlogPost.Internal.Repository.FileSystem
       , BlogPost.Internal.Repository.InMemory
       , BlogPost.Internal.Service
       , BlogPost.Internal.Service.Impl
       , BlogPost.Internal.Types
     build-depends:
         base ^>=4.15.1.0
+      , containers
+      , data-default
+      , directory 
+      , filepath
       , text
       , time
-      , containers
     default-language: Haskell2010
-    default-extensions: TypeFamilies
+    default-extensions: TypeFamilies, OverloadedStrings
 
 library web
     hs-source-dirs:   web

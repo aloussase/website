@@ -9,10 +9,10 @@ type Author = Text
 
 data BlogPost =
   BlogPost
-  { bpTitle            :: Text
-  , bpAuthor           :: Text
-  , bpShortDescription :: Text
-  , bpDate             :: UTCTime
-  , bpContent          :: Text
+  { bpTitle       :: Text
+  , bpAuthor      :: Text
+  , bpDescription :: Text
+  , bpDate        :: UTCTime
+  , bpContent     :: Text
   }
   deriving Show

@@ -3,8 +3,6 @@ module BlogPost.Internal.Repository.InMemory
     Handle
   , Id
   , close
-  , create
-  , deleteById
   , findById
   , new
 )
@@ -13,8 +11,9 @@ where
 import           BlogPost.Internal.Repository
 import           BlogPost.Internal.Types
 
+import           Control.Monad.IO.Class       (MonadIO, liftIO)
 import           Data.IORef
-import           Data.Map                     (Map)
+import           Data.Map                     (Map, (!?))
 import qualified Data.Map                     as M
 
 -- TODO:
@@ -22,7 +21,7 @@ import qualified Data.Map                     as M
 --  If I'm going to use this implementation in production I should use a
 --  TVar instead of an IORef.
 --
-data Handle = Handle (IORef (Map Int BlogPost))
+newtype Handle = Handle (IORef (Map Int BlogPost))
 
 -- | Create a new handle to an in memory repository.
 new :: IO Handle
@@ -34,21 +33,13 @@ close = const $ pure ()
 
 instance Repository Handle where
   type Id Handle = Int
-  create = createPost
   findAll = findAllPosts
   findById = findPostById
-  deleteById = deletePostById
 
-createPost :: Handle -> NewBlogPost -> IO BlogPost
-createPost = undefined
+findAllPosts :: (MonadIO m) => Handle -> m [BlogPostInfo (Id Handle)]
+findAllPosts _ = undefined
 
-findAllPosts :: Handle -> IO [BlogPost]
-findAllPosts =  const $ pure []
-
-findPostById :: Handle -> Id Handle -> IO (Maybe BlogPost)
-findPostById = undefined
-
-deletePostById :: Handle -> Id Handle -> IO ()
-deletePostById = undefined
-
-
+findPostById :: (MonadIO m) => Handle -> Id Handle -> m (Maybe BlogPost)
+findPostById (Handle m) postId = do
+  m' <- liftIO $ readIORef m
+  pure $ m' !? postId

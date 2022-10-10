@@ -13,11 +13,9 @@ import           Control.Monad.IO.Class       (liftIO)
 data Handle = Handle
 
 instance Service Handle where
-  findAll _ r = liftIO $ R.findAll r
-
+  findAll _ = R.findAll
   findById _ r id = liftIO $ R.findById r id
 
 
 new :: Handle
 new = Handle
-

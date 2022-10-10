@@ -1,6 +1,7 @@
 module BlogPost.Component
 (
     module BlogPost.Internal.Types
+  , BlogPostInfo (..)
   , Component (..)
   , Repository
   , Service (..)
@@ -9,18 +10,18 @@ module BlogPost.Component
 where
 
 import           BlogPost.Internal.Repository
-import qualified BlogPost.Internal.Repository.InMemory as InMemory
+import qualified BlogPost.Internal.Repository.FileSystem as Repository
 import           BlogPost.Internal.Service
-import qualified BlogPost.Internal.Service.Impl        as Service
+import qualified BlogPost.Internal.Service.Impl          as Service
 import           BlogPost.Internal.Types
 
 data Component =
   Component
   { bpService    :: Service.Handle
-  , bpRepository :: InMemory.Handle
+  , bpRepository :: Repository.Handle
   }
 
 
 -- | Create a new BlogPost component.
 new :: IO Component
-new = Component <$> pure Service.new <*> InMemory.new
+new =  Component Service.new <$> Repository.new

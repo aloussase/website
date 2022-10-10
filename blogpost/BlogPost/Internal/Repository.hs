@@ -1,13 +1,18 @@
 module BlogPost.Internal.Repository where
 
-import           BlogPost.Internal.Types (BlogPost)
-import qualified BlogPost.Internal.Types as BlogPost
+import           BlogPost.Internal.Types (Author, BlogPost, Title)
 
-data NewBlogPost =
-  NewBlogPost
-  { nbpTitle   :: BlogPost.Title
-  , nbpAuthor  :: BlogPost.Author
-  , nbpContent :: BlogPost.Content
+import           Control.Monad.IO.Class  (MonadIO)
+import           Data.Text               (Text)
+import           Data.Time.Clock         (UTCTime)
+
+data BlogPostInfo a =
+  BlogPostInfo
+  { infoId          :: a
+  , infoTitle       :: Title
+  , infoAuthor      :: Author
+  , infoDescription :: Text
+  , infoDate        :: UTCTime
   }
   deriving Show
 
@@ -16,14 +21,8 @@ class Repository a where
   -- | The type of values that uniquely identify blog posts.
   type Id a
 
-  -- | Create a new blog post.
-  create :: a -> NewBlogPost -> IO BlogPost
-
-  -- | Get all the blog post in this repository.
-  findAll :: a -> IO [BlogPost]
+  -- | Get all the blog posts in this repository.
+  findAll :: (MonadIO m) => a -> m [BlogPostInfo (Id a)]
 
   -- | Find the blog post for the corresponding id.
-  findById :: a -> Id a -> IO (Maybe BlogPost)
-
-  -- | Delete a blog post by its id.
-  deleteById :: a -> Id a -> IO ()
+  findById :: (MonadIO m) => a -> Id a -> m (Maybe BlogPost)
