@@ -1,24 +1,36 @@
-module Web.Component (runWebApp) where
+{-# LANGUAGE TypeApplications #-}
+module Web.Component (run) where
 
-import qualified BlogPost.Component       as BlogPost
+import qualified BlogPost.Component              as BlogPost
 
-import           Web.Internal.View.Pages
-import           Web.Internal.View.Static
+import           Web.Internal.View.HtmlPresenter
+import           Web.Internal.View.Navbar
 
-import           Control.Monad.IO.Class   (liftIO)
-import           Data.Maybe               (fromMaybe)
-import           System.Environment       (lookupEnv)
+import           Control.Monad.IO.Class          (liftIO)
+import           Data.Maybe                      (fromMaybe)
+import           Data.Proxy                      (Proxy (..))
+import           System.Environment              (lookupEnv)
+import           Text.Blaze.Html                 (toMarkup)
+import           Text.Blaze.Html.Renderer.Text
+import           Text.Cassius
+import           Text.Hamlet
 import           Web.Scotty
 
-runWebApp :: BlogPost.Component -> IO ()
-runWebApp bpComponent = do
+run :: BlogPost.Repository r => r -> IO ()
+run r = do
   port <- fromMaybe "3000" <$> lookupEnv "PORT"
   scotty (read port) $ do
     get "/styles.css" $ do
       setHeader "Content-Type" "text/css; charset=utf-8"
-      text renderCss
+      text $ renderCss $ $(cassiusFile "static/templates/Styles.cassius") render
 
     get "/" $ redirect "/blog"
-    get "/blog" $ liftIO (renderHomePage bpComponent) >>= html
+    get "/blog" $ do
+      let getAllPostsUseCase = BlogPost.newGetAllPosts r (Proxy @HtmlPresenter)
+      posts <- liftIO (toMarkup <$> BlogPost.getAllPosts getAllPostsUseCase)
+      html $ renderHtml $(shamletFile "static/templates/Home.hamlet")
 
-    get "/about" $ liftIO renderAboutPage >>= html
+    get "/about" $ html $ renderHtml $(shamletFile "static/templates/About.hamlet")
+
+  where
+    render = undefined

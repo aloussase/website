@@ -1,9 +1,7 @@
 module Main where
 
 import qualified BlogPost.Component as BPC
-import           Web.Component      (runWebApp)
+import qualified Web.Component      as Web
 
 main :: IO ()
-main = do
-  bpComponent <- BPC.new
-  runWebApp bpComponent
+main = BPC.newFileSystemRepository >>= Web.run

@@ -12,13 +12,4 @@ $doctype 5
         <div .hseparator>
 
         <section #home-posts>
-            $if null posts
-                <span #empty-posts>Whoa! Such empty
-            $else
-                $forall post <- posts
-                    <article .post-preview>
-                        <div .post-meta>
-                            <h2 .post-title>#{infoTitle post}
-                            <small .post-date>#{infoDate post}
-                        <p .post-description>#{infoDescription post}
-
+            ^{posts}

@@ -17,30 +17,29 @@ library blogpost
     hs-source-dirs:   blogpost
     exposed-modules:  BlogPost.Component
     other-modules:
-        BlogPost.Internal.Repository
+        BlogPost.Internal.Repository.Class
+      , BlogPost.Internal.Interactor.GetAllPosts
+      , BlogPost.Internal.Presentation.Class
       , BlogPost.Internal.Repository.FileSystem
-      , BlogPost.Internal.Repository.InMemory
-      , BlogPost.Internal.Service
-      , BlogPost.Internal.Service.Impl
       , BlogPost.Internal.Types
     build-depends:
         base ^>=4.15.1.0
-      , containers
       , directory 
       , filepath
       , text
       , time
+      , lens
+      , blaze-markup
     default-language: Haskell2010
-    default-extensions: TypeFamilies, OverloadedStrings
+    default-extensions: TypeFamilies, OverloadedStrings, TemplateHaskell
 
 library web
     hs-source-dirs:   web
     ghc-options:      -Wall -Wunused-packages
     exposed-modules:  Web.Component
     other-modules:
-          Web.Internal.Controller.BlogPost
-        , Web.Internal.View.Static
-        , Web.Internal.View.Pages
+          Web.Internal.View.HtmlPresenter
+        , Web.Internal.View.Navbar
     build-depends:
         base ^>=4.15.1.0
       , blogpost
@@ -50,6 +49,7 @@ library web
       , shakespeare
       , text
       , time
+      , lens
     default-language: Haskell2010
     default-extensions: OverloadedStrings, TemplateHaskell, QuasiQuotes, CPP, RecordWildCards
 

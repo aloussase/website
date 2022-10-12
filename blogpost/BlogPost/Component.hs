@@ -1,27 +1,15 @@
 module BlogPost.Component
 (
     module BlogPost.Internal.Types
-  , BlogPostInfo (..)
-  , Component (..)
+  , module BlogPost.Internal.Interactor.GetAllPosts
+  , module BlogPost.Internal.Repository.FileSystem
+  , module BlogPost.Internal.Presentation.Class
   , Repository
-  , Service (..)
-  , new
 )
 where
 
-import           BlogPost.Internal.Repository
-import qualified BlogPost.Internal.Repository.FileSystem as Repository
-import           BlogPost.Internal.Service
-import qualified BlogPost.Internal.Service.Impl          as Service
+import           BlogPost.Internal.Interactor.GetAllPosts
+import           BlogPost.Internal.Presentation.Class
+import           BlogPost.Internal.Repository.Class
+import           BlogPost.Internal.Repository.FileSystem
 import           BlogPost.Internal.Types
-
-data Component =
-  Component
-  { bpService    :: Service.Handle
-  , bpRepository :: Repository.Handle
-  }
-
-
--- | Create a new BlogPost component.
-new :: IO Component
-new =  Component Service.new <$> Repository.new
