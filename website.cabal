@@ -50,6 +50,8 @@ library web
       , shakespeare
       , time
       , lens
+      , pandoc
+      , text
     default-language: Haskell2010
     default-extensions: OverloadedStrings, TemplateHaskell, QuasiQuotes, CPP, RecordWildCards
 

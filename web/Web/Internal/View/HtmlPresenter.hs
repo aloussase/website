@@ -10,15 +10,22 @@ where
 import           BlogPost.Component
 
 import           Control.Lens
-import           Data.Proxy         (Proxy)
-import           Data.Time.Clock    (UTCTime)
-import           Text.Blaze.Html    (ToMarkup (..), string)
+import           Control.Monad.IO.Class (liftIO)
+import           Data.Proxy             (Proxy)
+import           Data.Time.Clock        (UTCTime)
+import           Text.Blaze.Html        (ToMarkup (..), string)
 import           Text.Hamlet
+import           Text.Pandoc
 
 
 instance ToMarkup UTCTime where toMarkup = string . show
 
 data HtmlPresenter
+
+postToHtml :: BlogPost -> IO Html
+postToHtml bp =
+  let txt = bp^.bp_content
+   in runIOorExplode $ readMarkdown def txt >>= writeHtml5 def
 
 instance Presenter (Proxy HtmlPresenter) where
   type Output (Proxy HtmlPresenter) = Html
@@ -35,11 +42,4 @@ instance Presenter (Proxy HtmlPresenter) where
       postDate = meta^.meta_date
       postDescription = meta^.meta_description
 
-  presentPost _ bp = pure [shamlet|
-    <article .blogpost>
-      <h1>#{postTitle}
-      <p>#{postContent}
-    |]
-    where
-      postTitle = bp^.bp_meta.meta_title
-      postContent = bp^.bp_content
+  presentPost _ bp = liftIO $ postToHtml bp

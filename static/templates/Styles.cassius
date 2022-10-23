@@ -61,9 +61,7 @@ a
         cursor: pointer
 
         &:hover
-            color: #{backgroundColor}
-            background-color: #{foregroundColor}
-            transform: scale(105%)
+            transform: scale(102%)
 
         .post-meta
             margin-bottom: 0.5rem
@@ -75,3 +73,11 @@ a
 
         p
             line-height: 200%
+
+#blog-post
+    h1
+        text-align: center
+
+    p
+        margin-bottom: 0.5rem
+        line-height: 200%
