@@ -1,3 +1,4 @@
+{-# LANGUAGE FlexibleContexts #-}
 module BlogPost.Internal.Repository.Class where
 
 import           BlogPost.Internal.Types (BlogPost, BlogPostMeta)

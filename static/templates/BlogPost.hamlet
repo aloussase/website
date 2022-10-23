@@ -1,0 +1,9 @@
+$doctype 5
+<html>
+    <head>
+        <title>Blog
+        <link rel=stylesheet href=/styles.css>
+    <body>
+        ^{navbar}
+        <section #blog-post>
+            ^{blogPost}

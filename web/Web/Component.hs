@@ -1,4 +1,6 @@
-{-# LANGUAGE TypeApplications #-}
+{-# LANGUAGE FlexibleContexts     #-}
+{-# LANGUAGE TypeApplications     #-}
+{-# LANGUAGE UndecidableInstances #-}
 module Web.Component (run) where
 
 import qualified BlogPost.Component              as BlogPost
@@ -16,7 +18,8 @@ import           Text.Cassius
 import           Text.Hamlet
 import           Web.Scotty
 
-run :: BlogPost.Repository r => r -> IO ()
+
+run :: (BlogPost.Repository r, Parsable (BlogPost.Id r)) => r -> IO ()
 run r = do
   port <- fromMaybe "3000" <$> lookupEnv "PORT"
   scotty (read port) $ do
@@ -29,6 +32,11 @@ run r = do
       let getAllPostsUseCase = BlogPost.newGetAllPosts r (Proxy @HtmlPresenter)
       posts <- liftIO (toMarkup <$> BlogPost.getAllPosts getAllPostsUseCase)
       html $ renderHtml $(shamletFile "static/templates/Home.hamlet")
+
+    get "/blog/:id" $ do
+      postId <- param "id"
+      blogPost <- liftIO $ toMarkup <$> BlogPost.getSinglePost postId r (Proxy @HtmlPresenter)
+      html $ renderHtml $(shamletFile "static/templates/BlogPost.hamlet")
 
     get "/about" $ html $ renderHtml $(shamletFile "static/templates/About.hamlet")
 

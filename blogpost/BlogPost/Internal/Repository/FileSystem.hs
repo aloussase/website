@@ -60,7 +60,7 @@ findAllPosts _ = do
 
 findPostById :: (MonadIO m) => Handle -> Id Handle -> m (Maybe BlogPost)
 findPostById _ postId = do
-  filePath <- flip combine (T.unpack postId <.> "md") <$> liftIO postsDir
+  filePath <- flip combine (titleToFilePath postId <.> "md") <$> liftIO postsDir
   parsePost <$> liftIO (TIO.readFile filePath)
   where
     parsePost :: Text -> Maybe BlogPost
@@ -73,3 +73,5 @@ findPostById _ postId = do
                 <$> parseTimeM True defaultTimeLocale dateFormat (T.unpack $ extractMeta tDate)
       pure $ makeBlogPost meta (T.unlines content)
 
+titleToFilePath :: Text -> FilePath
+titleToFilePath = T.unpack . T.toCaseFold . T.strip

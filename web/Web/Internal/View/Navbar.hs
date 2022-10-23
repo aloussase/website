@@ -1,6 +1,5 @@
 module Web.Internal.View.Navbar where
 
-import           Text.Blaze.Html.Renderer.Text
 import           Text.Hamlet
 
 
