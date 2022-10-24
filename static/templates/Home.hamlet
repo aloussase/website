@@ -13,3 +13,4 @@ $doctype 5
 
         <section #home-posts>
             ^{posts}
+    ^{footer}

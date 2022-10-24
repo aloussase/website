@@ -40,7 +40,6 @@ library web
     exposed-modules:  Web.Component
     other-modules:
           Web.Internal.View.HtmlPresenter
-        , Web.Internal.View.Navbar
     build-depends:
         base ^>=4.15.1.0
       , blogpost

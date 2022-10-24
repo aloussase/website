@@ -6,7 +6,6 @@ module Web.Component (run) where
 import qualified BlogPost.Component              as BlogPost
 
 import           Web.Internal.View.HtmlPresenter
-import           Web.Internal.View.Navbar
 
 import           Control.Monad.IO.Class          (liftIO)
 import           Data.Maybe                      (fromMaybe)
@@ -18,10 +17,19 @@ import           Text.Cassius
 import           Text.Hamlet
 import           Web.Scotty
 
+header :: String -> Html
+header pageTitle = $(shamletFile "static/templates/Header.hamlet")
+
+footer :: Html
+footer = $(shamletFile "static/templates/Footer.hamlet")
+
+navbar :: Html
+navbar = $(shamletFile "static/templates/Navbar.hamlet")
 
 run :: (BlogPost.Repository r, Parsable (BlogPost.Id r)) => r -> IO ()
 run r = do
   port <- fromMaybe "3000" <$> lookupEnv "PORT"
+
   scotty (read port) $ do
     get "/styles.css" $ do
       setHeader "Content-Type" "text/css; charset=utf-8"

@@ -7,3 +7,4 @@ $doctype 5
         ^{navbar}
         <section #blog-post>
             ^{blogPost}
+    ^{footer}

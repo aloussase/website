@@ -33,7 +33,7 @@ instance Presenter (Proxy HtmlPresenter) where
   presentPostMeta _ meta = pure [shamlet|
     <article .post-preview>
       <div .post-meta>
-          <h2 .post-title><a href="http://localhost:3000/blog/#{postTitle}">#{postTitle}</a>
+          <h2 .post-title><a href="/blog/#{postTitle}">#{postTitle}</a>
           <small .post-date>#{postDate}
       <p .post-description>#{postDescription}
     |]
