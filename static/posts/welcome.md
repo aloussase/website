@@ -1,8 +1,8 @@
 title: Welcome
 author: Alexander Goussas
-date: 09/10/2022
 description: This is my first post in the world of blogging!
-
+date: 09/10/2022
+---
 # Welcome!
 
 As you probably read in the About section, currently I'm a CS student in
