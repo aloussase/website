@@ -11,7 +11,7 @@ import           Control.Monad.IO.Class          (liftIO)
 import           Data.Maybe                      (fromMaybe)
 import           Data.Proxy                      (Proxy (..))
 import           System.Environment              (lookupEnv)
-import           Text.Blaze.Html                 (toMarkup)
+import           Text.Blaze.Html                 (ToMarkup, toMarkup)
 import           Text.Blaze.Html.Renderer.Text
 import           Text.Cassius
 import           Text.Hamlet
@@ -26,6 +26,24 @@ footer = $(shamletFile "static/templates/Footer.hamlet")
 navbar :: Html
 navbar = $(shamletFile "static/templates/Navbar.hamlet")
 
+getAllPosts :: (BlogPost.PersistenceAdapter r, BlogPost.PresenterAdapter p, ToMarkup (BlogPost.Output p))
+  => r
+  -> p
+  -> ActionM ()
+getAllPosts r p = do
+  let getAllPostsUseCase = BlogPost.newGetAllPosts r p
+  posts <- liftIO (toMarkup <$> BlogPost.getAllPosts getAllPostsUseCase)
+  html $ renderHtml $(shamletFile "static/templates/Home.hamlet")
+
+getSinglePost :: (BlogPost.PersistenceAdapter r, BlogPost.PresenterAdapter p, ToMarkup (BlogPost.Output p))
+  => r
+  -> p
+  -> BlogPost.Id r
+  -> ActionM ()
+getSinglePost r p postId = do
+   blogPost <- liftIO $ toMarkup <$> BlogPost.getSinglePost postId r p
+   html $ renderHtml $(shamletFile "static/templates/BlogPost.hamlet")
+
 run :: (BlogPost.PersistenceAdapter r, Parsable (BlogPost.Id r)) => r -> IO ()
 run r = do
   port <- fromMaybe "3000" <$> lookupEnv "PORT"
@@ -36,17 +54,10 @@ run r = do
       text $ renderCss $ $(cassiusFile "static/templates/Styles.cassius") render
 
     get "/" $ redirect "/blog"
-    get "/blog" $ do
-      let getAllPostsUseCase = BlogPost.newGetAllPosts r (Proxy @HtmlPresenter)
-      posts <- liftIO (toMarkup <$> BlogPost.getAllPosts getAllPostsUseCase)
-      html $ renderHtml $(shamletFile "static/templates/Home.hamlet")
-
-    get "/blog/:id" $ do
-      postId <- param "id"
-      blogPost <- liftIO $ toMarkup <$> BlogPost.getSinglePost postId r (Proxy @HtmlPresenter)
-      html $ renderHtml $(shamletFile "static/templates/BlogPost.hamlet")
-
+    get "/blog" $ getAllPosts r (Proxy @HtmlPresenter)
+    get "/blog/:id" $ param "id" >>= getSinglePost r (Proxy @HtmlPresenter)
     get "/about" $ html $ renderHtml $(shamletFile "static/templates/About.hamlet")
 
   where
     render = undefined
+

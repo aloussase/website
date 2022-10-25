@@ -17,7 +17,6 @@ import           Text.Blaze.Html        (ToMarkup (..), string)
 import           Text.Hamlet
 import           Text.Pandoc
 
-
 instance ToMarkup UTCTime where toMarkup = string . show
 
 data HtmlPresenter
