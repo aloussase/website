@@ -1,5 +1,5 @@
 {-# LANGUAGE TemplateHaskell #-}
-module BlogPost.Internal.Types
+module BlogPost.Internal.Entities
 (
     Title
   , Content

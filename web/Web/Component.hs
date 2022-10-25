@@ -26,7 +26,7 @@ footer = $(shamletFile "static/templates/Footer.hamlet")
 navbar :: Html
 navbar = $(shamletFile "static/templates/Navbar.hamlet")
 
-run :: (BlogPost.Repository r, Parsable (BlogPost.Id r)) => r -> IO ()
+run :: (BlogPost.PersistenceAdapter r, Parsable (BlogPost.Id r)) => r -> IO ()
 run r = do
   port <- fromMaybe "3000" <$> lookupEnv "PORT"
 

@@ -1,28 +1,29 @@
 {-# LANGUAGE TupleSections #-}
-module BlogPost.Internal.Repository.FileSystem
+module BlogPost.Internal.Infrastructure.FileSystemPersistenceAdapter
 (
     Handle
   , newFileSystemRepository
 )
 where
 
-import           BlogPost.Internal.Repository.Class
-import           BlogPost.Internal.Types
+import           BlogPost.Internal.Entities
+import           BlogPost.Internal.Ports.PersistenceAdapter
 
-import           Control.Monad.IO.Class             (MonadIO, liftIO)
+import           Control.Monad.IO.Class                     (MonadIO, liftIO)
 import           Data.Attoparsec.Text
-import           Data.Either.Combinators            (rightToMaybe)
-import           Data.Maybe                         (fromMaybe)
-import           Data.Text                          (Text)
-import qualified Data.Text                          as T
-import qualified Data.Text.IO                       as TIO
-import           Data.Time                          (UTCTime)
-import           Data.Time.Format                   (defaultTimeLocale,
-                                                     parseTimeM)
-import           System.Directory                   (listDirectory)
-import           System.Environment                 (lookupEnv)
-import           System.FilePath                    (combine, takeBaseName,
-                                                     (<.>))
+import           Data.Either.Combinators                    (rightToMaybe)
+import           Data.Maybe                                 (fromMaybe)
+import           Data.Text                                  (Text)
+import qualified Data.Text                                  as T
+import qualified Data.Text.IO                               as TIO
+import           Data.Time                                  (UTCTime)
+import           Data.Time.Format                           (defaultTimeLocale,
+                                                             parseTimeM)
+import           System.Directory                           (listDirectory)
+import           System.Environment                         (lookupEnv)
+import           System.FilePath                            (combine,
+                                                             takeBaseName,
+                                                             (<.>))
 
 
 postsDir :: IO FilePath
@@ -71,7 +72,7 @@ data Handle = Handle
 newFileSystemRepository :: IO Handle
 newFileSystemRepository = pure Handle
 
-instance Repository Handle where
+instance PersistenceAdapter Handle where
   type Id Handle = Text
   findAll = findAllPosts
   findById = findPostById

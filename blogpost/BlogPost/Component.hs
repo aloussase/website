@@ -1,17 +1,17 @@
 module BlogPost.Component
 (
-    module BlogPost.Internal.Types
+    module BlogPost.Internal.Entities
   , module BlogPost.Internal.Interactor.GetAllPosts
-  , module BlogPost.Internal.Repository.FileSystem
-  , module BlogPost.Internal.Presentation.Class
+  , module BlogPost.Internal.Infrastructure.FileSystemPersistenceAdapter
+  , module BlogPost.Internal.Ports.PresenterAdapter
   , module BlogPost.Internal.Interactor.GetSinglePost
-  , module BlogPost.Internal.Repository.Class
+  , module BlogPost.Internal.Ports.PersistenceAdapter
 )
 where
 
+import           BlogPost.Internal.Entities
+import           BlogPost.Internal.Infrastructure.FileSystemPersistenceAdapter
 import           BlogPost.Internal.Interactor.GetAllPosts
 import           BlogPost.Internal.Interactor.GetSinglePost
-import           BlogPost.Internal.Presentation.Class
-import           BlogPost.Internal.Repository.Class
-import           BlogPost.Internal.Repository.FileSystem
-import           BlogPost.Internal.Types
+import           BlogPost.Internal.Ports.PersistenceAdapter
+import           BlogPost.Internal.Ports.PresenterAdapter

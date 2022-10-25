@@ -1,13 +1,13 @@
 {-# LANGUAGE FlexibleContexts #-}
-module BlogPost.Internal.Repository.Class where
+module BlogPost.Internal.Ports.PersistenceAdapter where
 
-import           BlogPost.Internal.Types (BlogPost, BlogPostMeta)
+import           BlogPost.Internal.Entities (BlogPost, BlogPostMeta)
 
-import           Control.Monad.IO.Class  (MonadIO)
+import           Control.Monad.IO.Class     (MonadIO)
 
 
 -- | An interface for things that can act as blog post store.
-class Repository a where
+class PersistenceAdapter a where
   -- | The type of values that uniquely identify blog posts.
   type Id a
 

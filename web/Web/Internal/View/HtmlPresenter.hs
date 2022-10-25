@@ -27,7 +27,7 @@ postToHtml bp =
   let txt = bp^.bp_content
    in runIOorExplode $ readMarkdown def txt >>= writeHtml5 def
 
-instance Presenter (Proxy HtmlPresenter) where
+instance PresenterAdapter (Proxy HtmlPresenter) where
   type Output (Proxy HtmlPresenter) = Html
 
   presentPostMeta _ meta = pure [shamlet|

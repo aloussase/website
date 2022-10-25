@@ -2,13 +2,13 @@
 
 module BlogPost.Internal.Interactor.GetSinglePost where
 
-import           BlogPost.Internal.Presentation.Class
-import           BlogPost.Internal.Repository.Class
+import           BlogPost.Internal.Ports.PersistenceAdapter
+import           BlogPost.Internal.Ports.PresenterAdapter
 
-import           Text.Blaze                           (ToMarkup)
+import           Text.Blaze                                 (ToMarkup)
 
 -- | 'getSinglePost' return a formatted 'BlogPost' given the corresponding post id.
-getSinglePost :: (Repository r, Presenter p, Monoid (Output p), ToMarkup (Output p))
+getSinglePost :: (PersistenceAdapter r, PresenterAdapter p, Monoid (Output p), ToMarkup (Output p))
   => Id r
   -> r
   -> p

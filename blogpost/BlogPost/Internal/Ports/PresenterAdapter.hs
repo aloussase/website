@@ -1,13 +1,13 @@
 {-# LANGUAGE ConstrainedClassMethods #-}
 {-# LANGUAGE FlexibleContexts        #-}
-module BlogPost.Internal.Presentation.Class where
+module BlogPost.Internal.Ports.PresenterAdapter where
 
-import           BlogPost.Internal.Types
+import           BlogPost.Internal.Entities
 
-import           Control.Monad.IO.Class  (MonadIO)
-import           Text.Blaze              (ToMarkup)
+import           Control.Monad.IO.Class     (MonadIO)
+import           Text.Blaze                 (ToMarkup)
 
-class Presenter a where
+class PresenterAdapter a where
   type Output a
 
   -- | 'presentPostMeta' converts a single post's metadata to a textual representation
