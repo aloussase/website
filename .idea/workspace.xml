@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1c40f177-217d-4268-be32-ac1329291c48" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/Main.hs" beforeDir="false" afterPath="$PROJECT_DIR$/Main.hs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blogpost/BlogPost/Component.hs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blogpost/BlogPost/Internal/Entities.hs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blogpost/BlogPost/Internal/Infrastructure/FileSystemPersistenceAdapter.hs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blogpost/BlogPost/Internal/Interactor/GetAllPosts.hs" beforeDir="false" afterPath="$PROJECT_DIR$/Website.Domain/Website/Domain/GetAllPosts.hs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blogpost/BlogPost/Internal/Interactor/GetSinglePost.hs" beforeDir="false" afterPath="$PROJECT_DIR$/Website.Domain/Website/Domain/GetSinglePost.hs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blogpost/BlogPost/Internal/Ports/PersistenceAdapter.hs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blogpost/BlogPost/Internal/Ports/PresenterAdapter.hs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/Web/Component.hs" beforeDir="false" afterPath="$PROJECT_DIR$/Website.Application/Website/Application.hs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/Web/Internal/View/HtmlPresenter.hs" beforeDir="false" afterPath="$PROJECT_DIR$/Website.Infrastructure/Website/Infrastructure/HtmlBlogPostPresenter.hs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/website.cabal" beforeDir="false" afterPath="$PROJECT_DIR$/website.cabal" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="2" />
+  </component>
+  <component name="ProjectId" id="2GsivyeRQpqACZZeKAJvoflwRGw" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/home/aloussase/Code/website",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "settings.editor.splitter.proportion": "0.27032322"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Website.Application/Website" />
+      <recent name="$PROJECT_DIR$/Website.Infrastructure/Website/Infrastructure" />
+      <recent name="$PROJECT_DIR$/Website.Domain/Website/Domain" />
+      <recent name="$PROJECT_DIR$/Website.Infrastructure" />
+      <recent name="$PROJECT_DIR$/Website.Domain" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1c40f177-217d-4268-be32-ac1329291c48" name="Changes" comment="" />
+      <created>1667183931536</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1667183931536</updated>
+      <workItem from="1667183937216" duration="111000" />
+      <workItem from="1667184066010" duration="3525000" />
+      <workItem from="1667187619431" duration="1594000" />
+      <workItem from="1667189393036" duration="257000" />
+      <workItem from="1667189700433" duration="82000" />
+      <workItem from="1667189807275" duration="63000" />
+      <workItem from="1667189899432" duration="285000" />
+      <workItem from="1667190202261" duration="248000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

@@ -1,5 +1,5 @@
 {-# LANGUAGE TemplateHaskell #-}
-module BlogPost.Internal.Entities
+module Website.Domain.BlogPost
 (
     Title
   , Content

@@ -1,12 +1,12 @@
 {-# LANGUAGE ConstrainedClassMethods #-}
 {-# LANGUAGE FlexibleContexts        #-}
-module BlogPost.Internal.Ports.PresenterAdapter where
+module Website.Domain.BlogPostPresenter where
 
-import           BlogPost.Internal.Entities
+import           Website.Domain.BlogPost
 
 import           Control.Monad.IO.Class     (MonadIO)
 
-class (Monoid (Output a)) => PresenterAdapter a where
+class (Monoid (Output a)) => BlogPostPresenter a where
   type Output a
 
   -- | 'presentPostMeta' converts a single post's metadata to a textual representation

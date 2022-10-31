@@ -12,52 +12,102 @@ extra-source-files: README
 data-files:         static/templates/*.hamlet
                   , static/templates/*.cassius
 
-library blogpost
-    ghc-options:      -Wall -Wunused-packages -Wno-name-shadowing
-    hs-source-dirs:   blogpost
-    exposed-modules:  BlogPost.Component
-    other-modules:
-        BlogPost.Internal.Ports.PersistenceAdapter
-      , BlogPost.Internal.Entities
-      , BlogPost.Internal.Infrastructure.FileSystemPersistenceAdapter
-      , BlogPost.Internal.Interactor.GetAllPosts
-      , BlogPost.Internal.Interactor.GetSinglePost
-      , BlogPost.Internal.Ports.PresenterAdapter
+library website-domain
+    ghc-options:        -Wall -Wunused-packages -Wno-name-shadowing
+    hs-source-dirs:     Website.Domain
+    exposed-modules:
+        Website.Domain.BlogPost
+      , Website.Domain.BlogPostPresenter
+      , Website.Domain.BlogPostRepository
+      , Website.Domain.GetAllPosts
+      , Website.Domain.GetSinglePost
+      , Website.Domain.Project
     build-depends:
         base ^>=4.15.1.0
-      , directory                         >= 1.3.6 && < 1.4
-      , filepath                          >= 1.4.2 && < 1.5
+      , either
+      , exceptions
       , lens                              >= 5.2 && < 5.3
+      , modern-uri
+      , text
       , text                              >= 1.2.5 && < 1.3
       , time                              >= 1.9.3 && < 1.10
-      , attoparsec
-      , either
+      , validation
     default-language: Haskell2010
     default-extensions: TypeFamilies, OverloadedStrings, TemplateHaskell
 
-library web
-    hs-source-dirs:   web
+library website-infrastructure
+    hs-source-dirs:   Website.Infrastructure
     ghc-options:      -Wall -Wunused-packages
-    exposed-modules:  Web.Component
-    other-modules:
-          Web.Internal.View.HtmlPresenter
+    exposed-modules:
+          Website.Infrastructure.FileSystemBlogPostRepository
+        , Website.Infrastructure.HtmlBlogPostPresenter
     build-depends:
-        base ^>=4.15.1.0
-      , blogpost
+        website-domain
+      , attoparsec
+      , base ^>=4.15.1.0
       , blaze-html                        >= 0.9.1 && < 0.10
+      , directory                         >= 1.3.6 && < 1.4
+      , filepath                          >= 1.4.2 && < 1.5
       , lens                              >= 5.2 && < 5.3
       , pandoc                            >= 2.19.2 && < 2.20
-      , scotty                            >= 0.12 && < 0.13
       , shakespeare                       >= 2.0.30 && < 2.1
+      , text
       , time                              >= 1.9.3 && < 1.10
+      , either
     default-language: Haskell2010
-    default-extensions: OverloadedStrings, TemplateHaskell, QuasiQuotes, CPP, RecordWildCards
+    default-extensions:
+        OverloadedStrings
+      , TemplateHaskell
+      , QuasiQuotes
+      , CPP
+      , RecordWildCards
+      , FlexibleInstances
+      , TypeFamilies
 
-executable website
-    main-is:          Main.hs
+library website-application
+    hs-source-dirs:   Website.Application
     ghc-options:      -Wall -Wunused-packages
+    exposed-modules:
+        Website.Application
+    other-modules:
+          Website.Application.Queries
+        , Website.Application.QueryApiHandler
     build-depends:
-        base ^>=4.15.1.0
-      , blogpost
-      , web
+        website-domain
+      , website-infrastructure
+      , base ^>=4.15.1.0
+      , shakespeare                       >= 2.0.30 && < 2.1
+      , scotty                            >= 0.12 && < 0.13
+      , blaze-html                        >= 0.9.1 && < 0.10
     default-language: Haskell2010
+    default-extensions:
+          OverloadedStrings
+        , TemplateHaskell
+        , FlexibleContexts
+        , TypeApplications
+        , UndecidableInstances
+        , GADTs
+
+executable website-exe
+    ghc-options:      -Wall -Wunused-packages
+    main-is:          Main.hs
+    build-depends:
+        website-domain
+      , website-infrastructure
+      , website-application
+      , base ^>=4.15.1.0
+    default-language: Haskell2010
+
+test-suite tests
+  type:           exitcode-stdio-1.0
+  main-is:        Spec.hs
+  other-modules:
+        ProjectsSpec
+  hs-source-dirs: test
+  build-depends:
+        website-domain
+      , base ^>=4.15.1.0
+      , hspec
+      , text
+  default-language: Haskell2010
+  default-extensions: OverloadedStrings

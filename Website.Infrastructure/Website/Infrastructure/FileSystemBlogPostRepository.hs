@@ -1,13 +1,13 @@
 {-# LANGUAGE TupleSections #-}
-module BlogPost.Internal.Infrastructure.FileSystemPersistenceAdapter
+module Website.Infrastructure.FileSystemBlogPostRepository
 (
     Handle
   , newFileSystemRepository
 )
 where
 
-import           BlogPost.Internal.Entities
-import           BlogPost.Internal.Ports.PersistenceAdapter
+import           Website.Domain.BlogPost
+import           Website.Domain.BlogPostRepository
 
 import           Control.Monad.IO.Class                     (MonadIO, liftIO)
 import           Data.Attoparsec.Text
@@ -72,7 +72,7 @@ data Handle = Handle
 newFileSystemRepository :: IO Handle
 newFileSystemRepository = pure Handle
 
-instance PersistenceAdapter Handle where
+instance BlogPostRepository Handle where
   type Id Handle = Text
   findAll = findAllPosts
   findById = findPostById

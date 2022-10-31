@@ -1,7 +1,7 @@
 module Main where
 
-import qualified BlogPost.Component as BPC
-import qualified Web.Component      as Web
+import Website.Infrastructure.FileSystemBlogPostRepository
+import Website.Application
 
 main :: IO ()
-main = BPC.newFileSystemRepository >>= Web.run
+main = newFileSystemRepository >>= run

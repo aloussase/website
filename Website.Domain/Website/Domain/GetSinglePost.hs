@@ -1,12 +1,12 @@
 {-# LANGUAGE FlexibleContexts #-}
 
-module BlogPost.Internal.Interactor.GetSinglePost where
+module Website.Domain.GetSinglePost where
 
-import           BlogPost.Internal.Ports.PersistenceAdapter
-import           BlogPost.Internal.Ports.PresenterAdapter
+import           Website.Domain.BlogPostRepository
+import           Website.Domain.BlogPostPresenter
 
 -- | 'getSinglePost' return a formatted 'BlogPost' given the corresponding post id.
-getSinglePost :: (PersistenceAdapter r, PresenterAdapter p)
+getSinglePost :: (BlogPostRepository r, BlogPostPresenter p)
   => Id r
   -> r
   -> p

@@ -1,19 +1,18 @@
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE QuasiQuotes       #-}
-{-# LANGUAGE TypeFamilies      #-}
-module Web.Internal.View.HtmlPresenter
+{-# LANGUAGE QuasiQuotes #-}
+module Website.Infrastructure.HtmlBlogPostPresenter
 (
   HtmlPresenter
 )
 where
 
-import           BlogPost.Component
+import           Website.Domain.BlogPost
+import           Website.Domain.BlogPostPresenter
 
 import           Control.Lens
-import           Control.Monad.IO.Class (liftIO)
-import           Data.Proxy             (Proxy)
-import           Data.Time.Clock        (UTCTime)
-import           Text.Blaze.Html        (ToMarkup (..), string)
+import           Control.Monad.IO.Class           (liftIO)
+import           Data.Proxy                       (Proxy)
+import           Data.Time.Clock                  (UTCTime)
+import           Text.Blaze.Html                  (ToMarkup (..), string)
 import           Text.Hamlet
 import           Text.Pandoc
 
@@ -26,7 +25,7 @@ postToHtml bp =
   let txt = bp^.bp_content
    in runIOorExplode $ readMarkdown def txt >>= writeHtml5 def
 
-instance PresenterAdapter (Proxy HtmlPresenter) where
+instance BlogPostPresenter (Proxy HtmlPresenter) where
   type Output (Proxy HtmlPresenter) = Html
 
   presentPostMeta _ meta = pure [shamlet|
