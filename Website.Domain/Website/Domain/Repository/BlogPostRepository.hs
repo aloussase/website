@@ -1,9 +1,9 @@
 {-# LANGUAGE FlexibleContexts #-}
-module Website.Domain.BlogPostRepository where
+module Website.Domain.Repository.BlogPostRepository where
 
 import           Website.Domain.BlogPost (BlogPost, BlogPostMeta)
 
-import           Control.Monad.IO.Class     (MonadIO)
+import           Control.Monad.IO.Class  (MonadIO)
 
 
 -- | An interface for things that can act as blog post store.

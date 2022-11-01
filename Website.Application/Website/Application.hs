@@ -1,7 +1,9 @@
 module Website.Application (run) where
 
-import           Website.Application.QueryApiHandler          (queryHandler)
-import           Website.Domain.BlogPostRepository
+import           Website.Application.BlogPostQueries
+import           Website.Application.BlogPostQueryApiHandler  (queryHandler)
+import           Website.Domain.Repository.BlogPostRepository
+import           Website.Infrastructure.HtmlBlogPostFormatter
 
 import           Control.Monad.IO.Class
 import           Data.Data                                    (Proxy (..))
@@ -11,8 +13,7 @@ import           Text.Blaze.Html.Renderer.Text
 import           Text.Cassius
 import           Text.Hamlet
 import           Web.Scotty
-import           Website.Application.Queries
-import           Website.Infrastructure.HtmlBlogPostPresenter
+
 
 navbar :: Html
 navbar = $(shamletFile "static/templates/Navbar.hamlet")
@@ -31,11 +32,11 @@ run r = do
 
     get "/" $ redirect "/blog"
     get "/blog" $ do
-      posts <- liftIO $ queryHandler r (Proxy @HtmlPresenter) GetAllPosts
+      posts <- liftIO $ queryHandler r (Proxy @HtmlBlogPostFormatter) GetAllPosts
       html $ renderHtml $(shamletFile "static/templates/Home.hamlet")
 
     get "/blog/:id" $ param "id" >>= \postId -> do
-      blogPost <- liftIO $ queryHandler r (Proxy @HtmlPresenter) (GetSinglePost postId)
+      blogPost <- liftIO $ queryHandler r (Proxy @HtmlBlogPostFormatter) (GetSinglePost postId)
       html $ renderHtml $(shamletFile "static/templates/BlogPost.hamlet")
 
     get "/about" $ html $ renderHtml $(shamletFile "static/templates/About.hamlet")

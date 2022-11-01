@@ -17,11 +17,12 @@ library website-domain
     hs-source-dirs:     Website.Domain
     exposed-modules:
         Website.Domain.BlogPost
-      , Website.Domain.BlogPostPresenter
-      , Website.Domain.BlogPostRepository
-      , Website.Domain.GetAllPosts
-      , Website.Domain.GetSinglePost
       , Website.Domain.Project
+      , Website.Domain.Repository.BlogPostRepository
+      , Website.Domain.Service.BlogPostFormatter
+      , Website.Domain.Service.ProjectService
+      , Website.Domain.UseCase.GetAllPosts
+      , Website.Domain.UseCase.GetSinglePost
     build-depends:
         base ^>=4.15.1.0
       , either
@@ -40,7 +41,8 @@ library website-infrastructure
     ghc-options:      -Wall -Wunused-packages
     exposed-modules:
           Website.Infrastructure.FileSystemBlogPostRepository
-        , Website.Infrastructure.HtmlBlogPostPresenter
+        , Website.Infrastructure.HtmlBlogPostFormatter
+        , Website.Infrastructure.GithubProjectService
     build-depends:
         website-domain
       , attoparsec
@@ -54,6 +56,7 @@ library website-infrastructure
       , text
       , time                              >= 1.9.3 && < 1.10
       , either
+      , req
     default-language: Haskell2010
     default-extensions:
         OverloadedStrings
@@ -70,8 +73,8 @@ library website-application
     exposed-modules:
         Website.Application
     other-modules:
-          Website.Application.Queries
-        , Website.Application.QueryApiHandler
+          Website.Application.BlogPostQueries
+        , Website.Application.BlogPostQueryApiHandler
     build-depends:
         website-domain
       , website-infrastructure

@@ -1,18 +1,18 @@
 {-# LANGUAGE ConstrainedClassMethods #-}
 {-# LANGUAGE FlexibleContexts        #-}
-module Website.Domain.BlogPostPresenter where
+module Website.Domain.Service.BlogPostFormatter where
 
 import           Website.Domain.BlogPost
 
-import           Control.Monad.IO.Class     (MonadIO)
+import           Control.Monad.IO.Class  (MonadIO)
 
-class (Monoid (Output a)) => BlogPostPresenter a where
+class (Monoid (Output a)) => BlogPostFormatter a where
   type Output a
 
   -- | 'presentPostMeta' converts a single post's metadata to a textual representation
   -- to be consumed by the view.
-  presentPostMeta :: (MonadIO m) => a -> BlogPostMeta -> m (Output a)
+  formatPostMeta :: (MonadIO m) => a -> BlogPostMeta -> m (Output a)
 
   -- | 'presentPost' converts a single post to a textual representation to be
   -- consumed by the view.
-  presentPost :: (MonadIO m) => a -> BlogPost -> m (Output a)
+  formatPost :: (MonadIO m) => a -> BlogPost -> m (Output a)

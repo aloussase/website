@@ -1,34 +1,35 @@
 {-# LANGUAGE QuasiQuotes #-}
-module Website.Infrastructure.HtmlBlogPostPresenter
+module Website.Infrastructure.HtmlBlogPostFormatter
 (
-  HtmlPresenter
+  HtmlBlogPostFormatter
 )
 where
 
 import           Website.Domain.BlogPost
-import           Website.Domain.BlogPostPresenter
+import           Website.Domain.Service.BlogPostFormatter
 
 import           Control.Lens
-import           Control.Monad.IO.Class           (liftIO)
-import           Data.Proxy                       (Proxy)
-import           Data.Time.Clock                  (UTCTime)
-import           Text.Blaze.Html                  (ToMarkup (..), string)
+import           Control.Monad.IO.Class                   (liftIO)
+import           Data.Proxy                               (Proxy)
+import           Data.Time.Clock                          (UTCTime)
+import           Text.Blaze.Html                          (ToMarkup (..),
+                                                           string)
 import           Text.Hamlet
 import           Text.Pandoc
 
 instance ToMarkup UTCTime where toMarkup = string . show
 
-data HtmlPresenter
+data HtmlBlogPostFormatter
 
 postToHtml :: BlogPost -> IO Html
 postToHtml bp =
   let txt = bp^.bp_content
    in runIOorExplode $ readMarkdown def txt >>= writeHtml5 def
 
-instance BlogPostPresenter (Proxy HtmlPresenter) where
-  type Output (Proxy HtmlPresenter) = Html
+instance BlogPostFormatter (Proxy HtmlBlogPostFormatter) where
+  type Output (Proxy HtmlBlogPostFormatter) = Html
 
-  presentPostMeta _ meta = pure [shamlet|
+  formatPostMeta _ meta = pure [shamlet|
     <article .post-preview>
       <div .post-meta>
           <h2 .post-title><a href="/blog/#{postTitle}">#{postTitle}</a>
@@ -40,4 +41,4 @@ instance BlogPostPresenter (Proxy HtmlPresenter) where
       postDate = meta^.meta_date
       postDescription = meta^.meta_description
 
-  presentPost _ bp = liftIO $ postToHtml bp
+  formatPost _ bp = liftIO $ postToHtml bp

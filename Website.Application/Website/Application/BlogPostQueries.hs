@@ -1,4 +1,4 @@
-module Website.Application.Queries where
+module Website.Application.BlogPostQueries where
 
 data Query id =
   GetSinglePost id
