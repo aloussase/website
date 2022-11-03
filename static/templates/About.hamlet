@@ -4,41 +4,41 @@ $doctype 5
         <title>About
         <link rel=stylesheet href=/styles.css>
     <body>
-        ^{navbar}
         <header #about-header>
+            ^{navbar}
+        <main>
             <h1>About
+            <div .hseparator>
 
-        <div .hseparator>
+            <section #about-content>
+                <div .about-section>
+                    <p>
+                        Hi! I'm Alexander Goussas. I'm a CS undergrad student at ESPOL,
+                        Ecuador. I am also an active member of the university's
+                        Open Source club #
+                        <a href=https://github.com/kokoaespol>Kokoa.
+                    <p>
+                        I'm passionate about many programming topics and love having
+                        fun programming with friends, though I don't have many friends
+                        that like programming 😂.
+                    <p>
+                        I'm also a sucker for fantasy books, specially the Cosmere.
+                        I like practicing martial arts in my free time. A fun fact
+                        is that I've been trying to learn french because I am ashamed
+                        of having "Goussas" as my last name and not knowing it.
 
-        <section #about-content>
-            <div .about-section>
-                <p>
-                    Hi! I'm Alexander Goussas. I'm a CS undergrad student at ESPOL,
-                    Ecuador. I am also an active member of the university's
-                    Open Source club #
-                    <a href=https://github.com/kokoaespol>Kokoa.
-                <p>
-                    I'm passionate about many programming topics and love having
-                    fun programming with friends, though I don't have many friends
-                    that like programming 😂.
-                <p>
-                    I'm also a sucker for fantasy books, specially the Cosmere.
-                    I like practicing martial arts in my free time. A fun fact
-                    is that I've been trying to learn french because I am ashamed
-                    of having "Goussas" as my last name and not knowing it.
-
-            <div .about-section>
-                <h3>Contact me
-                <p>
-                    I'm currently open for hiring! As of now, I'm happy to accept
-                    internships. I can learn whatever it is you guys work with if
-                    I don't already know it. Having said that, I would specially
-                    love to use Haskell at work 😉.
-                <p>
-                    You can find me on Twitter as #
-                    <a href=https://twitter.com/aloussase>@aloussase.
-                    And here is a link to my #
-                    <a href=https://github.com/aloussase>Github
-                    in case you want to take a look. Otherwise, feel free to email
-                    me at goussasalexander@gmail.com.
+                <div .about-section>
+                    <h3>Contact me
+                    <p>
+                        I'm currently open for hiring! As of now, I'm happy to accept
+                        internships. I can learn whatever it is you guys work with if
+                        I don't already know it. Having said that, I would specially
+                        love to use Haskell at work 😉.
+                    <p>
+                        You can find me on Twitter as #
+                        <a href=https://twitter.com/aloussase>@aloussase.
+                        And here is a link to my #
+                        <a href=https://github.com/aloussase>Github
+                        in case you want to take a look. Otherwise, feel free to email
+                        me at goussasalexander@gmail.com.
     ^{footer}

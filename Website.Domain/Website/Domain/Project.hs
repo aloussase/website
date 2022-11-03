@@ -4,7 +4,9 @@ module Website.Domain.Project
     Project
   , mkProject
   , projectName
+  , unProjectName
   , projectDescription
+  , unProjectDescription
   , projectUri
 )
 where
@@ -17,8 +19,8 @@ import qualified Data.Text               as T
 import           Data.Validation
 import           Text.URI                (URI, mkURI)
 
-newtype ProjectName = ProjectName Text deriving Show
-newtype ProjectDescription = ProjectDescription Text deriving Show
+newtype ProjectName = ProjectName { unProjectName :: Text } deriving Show
+newtype ProjectDescription = ProjectDescription { unProjectDescription :: Text } deriving Show
 
 data Project = Project
   { projectName        :: ProjectName

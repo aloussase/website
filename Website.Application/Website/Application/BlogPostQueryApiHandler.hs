@@ -1,35 +1,31 @@
 {-# LANGUAGE ScopedTypeVariables #-}
 module Website.Application.BlogPostQueryApiHandler
 (
-  queryHandler
+  blogPostQueryHandler
+  , (!)
 )
 where
 
 import           Website.Application.BlogPostQueries
+import           Website.Application.Common
 import           Website.Domain.Repository.BlogPostRepository
-import           Website.Domain.Service.BlogPostFormatter
 import           Website.Domain.UseCase.GetAllPosts
 import           Website.Domain.UseCase.GetSinglePost
+import           Website.Infrastructure.HtmlBlogPostFormatter
 
 import           Control.Monad.IO.Class
-import           Text.Blaze.Html
+import           Data.Proxy
+import           Text.Blaze.Html.Renderer.Text
+import           Text.Hamlet
+import           Web.Scotty
 
-queryHandler :: (BlogPostRepository r, BlogPostFormatter p, ToMarkup (Output p)) => r -> p -> Query (Id r) -> IO Markup
-queryHandler r p (GetSinglePost id) = onGetSinglePost r p id
-queryHandler r p GetAllPosts        = onGetAllPosts r p
+blogPostQueryHandler :: (BlogPostRepository repository) => QueryHandler ActionM Query repository
 
-onGetSinglePost ::
-  (BlogPostRepository r, BlogPostFormatter p, ToMarkup (Output p), MonadIO m) =>
-  r ->
-  p ->
-  Id r ->
-  m Markup
-onGetSinglePost r p postId = liftIO (toMarkup <$> getSinglePost postId r p)
+blogPostQueryHandler (GetSinglePost repository id) = do
+  blogPost <- liftIO $ getSinglePost id repository (Proxy @HtmlBlogPostFormatter)
+  html $ renderHtml $(shamletFile "static/templates/BlogPost.hamlet")
 
-onGetAllPosts ::
-  (BlogPostRepository r, BlogPostFormatter p, ToMarkup (Output p), MonadIO m) =>
-  r ->
-  p ->
-  m Markup
-onGetAllPosts r p = liftIO (toMarkup <$> getAllPosts r p)
+blogPostQueryHandler (GetAllPosts blogPostRepository) = do
+  posts <- liftIO $ getAllPosts blogPostRepository (Proxy @HtmlBlogPostFormatter)
+  html $ renderHtml $(shamletFile "static/templates/Home.hamlet")
 

@@ -18,6 +18,10 @@ body
 
 a
     text-decoration: none
+    color: #{foregroundColor}
+
+main
+    margin-top: 5rem
 
 .hseparator
     height: 1px
@@ -31,8 +35,15 @@ a
     display: flex
     align-items: center
     justify-content: center
-    min-with: 100%
+    position: fixed
+    top: 0
+    left: 0
+    min-width: 100vw
+    box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.75);
     padding: 1rem
+    z-index: 1
 
     a
         margin-left: 0.5rem
@@ -82,3 +93,21 @@ a
     p
         margin-bottom: 0.5rem
         line-height: 200%
+
+
+.project-card
+    display: flex
+    flex-direction: column
+    padding: 1rem
+    margin: 1rem 0
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    width: 100%
+
+    .project-link
+        border: 1px #{foregroundColor} solid
+        border-radius: 5px
+        padding: 0.4rem
+        width: fit-content
+
+.project-card > *
+    margin: 0.5rem 0

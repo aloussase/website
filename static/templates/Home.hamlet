@@ -4,13 +4,16 @@ $doctype 5
         <title>Home
         <link rel=stylesheet href=/styles.css>
     <body>
-        ^{navbar}
-        <header #home-header>
-            <h1>Hi, I'm Alexander!
-            <h2>Welcome to my website
 
-        <div .hseparator>
+        <header>
+            ^{navbar}
 
-        <section #home-posts>
-            ^{posts}
-    ^{footer}
+        <main>
+            <div #home-header>
+                <h1>Hi, I'm Alexander!
+                <h2>Welcome to my website
+
+            <div .hseparator>
+            <section #home-posts>
+                ^{posts}
+        ^{footer}

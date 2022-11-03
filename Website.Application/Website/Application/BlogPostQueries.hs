@@ -1,6 +1,5 @@
 module Website.Application.BlogPostQueries where
 
-data Query id =
-  GetSinglePost id
-  | GetAllPosts
-  deriving Show
+import           Website.Domain.Repository.BlogPostRepository
+
+data Query repository = GetSinglePost repository (Id repository) | GetAllPosts repository
